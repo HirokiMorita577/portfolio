@@ -3,95 +3,308 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ポートフォリオ - 森田裕生</title>
+  <title>森田裕生 | Portfolio</title>
+  <meta name="description" content="日本工業大学 情報メディア工学科 森田裕生のポートフォリオ。強化学習・Webアプリ・3D表現の制作実績。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --text: #1d1d1f;
+      --muted: #5f6368;
+      --line: #e3e3df;
+      --accent: #2f6fed;
+      --accent-soft: #e8efff;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111214;
+        --surface: #1a1b1e;
+        --text: #ececec;
+        --muted: #a0a4ab;
+        --line: #2c2e33;
+        --accent: #7aa2ff;
+        --accent-soft: #1e2940;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      color: #333;
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
     }
-    header {
-      background: #333;
-      color: white;
-      padding: 1em;
-      text-align: center;
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
     }
-    section {
-      padding: 2em;
-      max-width: 800px;
-      margin: auto;
+    nav .inner {
+      max-width: 960px; margin: auto; padding: 0.75rem 1rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
     }
+    nav .brand { font-weight: 700; color: var(--text); }
+    nav ul { list-style: none; display: flex; gap: 1.25rem; margin: 0; padding: 0; font-size: 0.9rem; }
+    nav ul a { color: var(--muted); }
+
+    main { max-width: 960px; margin: auto; padding: 0 1rem; }
+    section { padding: 4rem 0 1rem; }
     h2 {
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.3em;
+      font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); font-family: var(--mono); margin: 0 0 1.5rem;
     }
-    .project {
-      background: white;
-      border: 1px solid #ddd;
-      padding: 1em;
-      margin-bottom: 1.5em;
-      border-radius: 8px;
+
+    .hero { padding: 5rem 0 2rem; }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.2; margin: 0 0 0.5rem; }
+    .hero .role { color: var(--muted); font-size: 1.05rem; margin: 0 0 1.5rem; }
+    .hero .lead { max-width: 640px; font-size: 1.05rem; }
+    .links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .btn {
+      display: inline-block; padding: 0.5rem 1.1rem; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--surface); color: var(--text); font-size: 0.9rem;
     }
-    .project h3 {
-      margin-top: 0;
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn:hover { text-decoration: none; filter: brightness(0.95); }
+
+    .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
+    .skill { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.25rem; }
+    .skill h3 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+    .tags li {
+      font-size: 0.78rem; font-family: var(--mono); padding: 0.1rem 0.55rem;
+      border-radius: 6px; background: var(--accent-soft); color: var(--accent);
     }
-    footer {
-      text-align: center;
-      padding: 1em;
-      background: #eee;
-      font-size: 0.9em;
+
+    .projects { display: grid; gap: 1.25rem; }
+    .project { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; }
+    .project.featured { border-color: var(--accent); }
+    .project header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+    .project h3 { margin: 0; font-size: 1.2rem; }
+    .project .kind { font-size: 0.8rem; color: var(--muted); }
+    .project p { margin: 0.75rem 0; }
+    .project ul.points { margin: 0.5rem 0 1rem; padding-left: 1.2rem; color: var(--muted); font-size: 0.95rem; }
+    .project .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; align-items: center; }
+    .project .foot a { font-size: 0.9rem; }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .stat { border: 1px solid var(--line); border-radius: 10px; padding: 0.75rem; }
+    .stat .num { font-family: var(--mono); font-size: 1.3rem; font-weight: 500; }
+    .stat .label { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    .timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+    .timeline li { position: relative; padding: 0 0 1rem 1.25rem; }
+    .timeline li::before {
+      content: ""; position: absolute; left: -7px; top: 0.6rem;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--accent);
+    }
+    .timeline .status { color: var(--muted); font-size: 0.85rem; }
+
+    .contact { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; }
+    footer { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 3rem 1rem 2rem; }
+
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      section { padding-top: 3rem; }
+      .hero { padding-top: 3rem; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>森田裕生</h1>
-    <p>大学生・エンジニア志望 | Python / HTML / CSS / JavaScript / Rust / C / VB</Canvas></p>
-  </header>
+  <nav>
+    <div class="inner">
+      <a class="brand" href="#top">Hiroki Morita</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#works">Works</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <section>
-    <h2>プロフィール</h2>
-    <p>
-      日本工業大学に通いながら、個人開発やハッカソンに参加しています。
-      Webアプリやツール開発に興味があり、ReactやThree.js、Rubyなども勉強中です。
-    </p>
-  </section>
+  <main id="top">
+    <section class="hero">
+      <h1>森田 裕生</h1>
+      <p class="role">日本工業大学 先進工学部 情報メディア工学科 3年</p>
+      <p class="lead">
+        強化学習の論文再現から、匿名SNS・LINEアプリ・3D Webまで。
+        「動くものを作って確かめる」ことを軸に、AIとWebの両方で個人開発・チーム開発・ハッカソンに取り組んでいます。
+      </p>
+      <div class="links">
+        <a class="btn primary" href="#works">制作実績を見る</a>
+        <a class="btn" href="https://github.com/HirokiMorita577" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://github.com/HirokiMorita577/portfolio/blob/main/README.md" target="_blank" rel="noopener">スキルシート</a>
+      </div>
+    </section>
 
-  <section>
-    <h2>スキル</h2>
-    <ul>
-      <li>言語: Python, JavaScript, Rust, C</li>
-      <li>ツール: Git, VSCode, GitHub</li>
-      <li>フレームワーク: React, Three.js, Flask</li>
-    </ul>
-    <p><a href="https://github.com/HirokiMorita577/portfolio/blob/main/README.md">スキルシートはこちら</a></p>
-  </section>
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        Python・C・VBで授業と個人制作を重ねてきました。
+        大学ではWebフロントエンド（React / Three.js）に加え、Flaskによるサーバーサイド開発、
+        PyTorchによる深層強化学習に取り組んでいます。
+        仕様書や要件定義書を先に書き、テストと検証を回しながら実装を進めるスタイルです。
+      </p>
+    </section>
 
-  <section>
-    <h2>制作実績</h2>
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div class="skill">
+          <h3>言語</h3>
+          <ul class="tags"><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>C</li><li>VB</li><li>Rust</li></ul>
+        </div>
+        <div class="skill">
+          <h3>フロントエンド</h3>
+          <ul class="tags"><li>React</li><li>Vite</li><li>Three.js</li><li>cannon-es</li><li>HTML/CSS</li></ul>
+        </div>
+        <div class="skill">
+          <h3>バックエンド・インフラ</h3>
+          <ul class="tags"><li>Flask</li><li>SQLite</li><li>Firebase</li><li>Vercel</li><li>Docker</li></ul>
+        </div>
+        <div class="skill">
+          <h3>AI・機械学習</h3>
+          <ul class="tags"><li>PyTorch</li><li>DQN / HRA</li><li>ALE</li><li>Claude API</li><li>Google Colab</li></ul>
+        </div>
+        <div class="skill">
+          <h3>ツール</h3>
+          <ul class="tags"><li>Git / GitHub</li><li>VS Code</li><li>pytest</li><li>Blender</li><li>LINE LIFF</li></ul>
+        </div>
+      </div>
+    </section>
 
-    <div class="project">
-  <h3>Three.js 3D自己紹介アート(制作中)</h3>
-  <p>
-    Three.jsとBlenderを使用して制作した3Dアート作品。  
-    自分のプロフィールや世界観を立体的に表現できるインタラクティブな空間を実現。  
-    マウス操作によるカメラ制御、GLTFモデルの読み込み、アニメーション再生機能を実装。
-  </p>
-  <p><strong>工夫点:</strong> モデルの軽量化、カメラ位置の調整、読み込み中のUX対策（ローディング演出）</p>
-  <p><a href="https://hirokimorita577.github.io/threejs-demo/">GitHubリポジトリはこちら</a></p>
-</div>
-  </section>
+    <section id="works">
+      <h2>Works</h2>
+      <div class="projects">
 
-  <section>
-    <h2>連絡先</h2>
-    <p>Email: hiroi.morita.bite@gmail.com</p>
-    <p>GitHub: <a href="https://github.com/hirokimorita577">github.com/hirokimorita577</a></p>
-  </section>
+        <article class="project featured">
+          <header>
+            <h3>Ms. Pac-Man 強化学習（HRA 論文再現）</h3>
+            <span class="kind">チーム開発 · 2026</span>
+          </header>
+          <p>
+            NeurIPS 2017 の論文「Hybrid Reward Architecture for Reinforcement Learning」を、
+            Atari 2600 版 Ms. Pac-Man（ALE）で再現するプロジェクト。
+            報酬をエサ・ゴースト・フルーツなどの要素ごとに分解し、それぞれの価値関数を合算して行動を決めます。
+          </p>
+          <div class="stats">
+            <div class="stat"><div class="num">14,845</div><div class="label">学習時 直近100回平均<br>（11,000エピソード時点）</div></div>
+            <div class="stat"><div class="num">15,693</div><div class="label">人間の平均スコア<br>（論文記載）</div></div>
+            <div class="stat"><div class="num">2,168</div><div class="label">A3C 画素入力<br>（論文記載）</div></div>
+          </div>
+          <ul class="points">
+            <li>要件定義書（機能要件 44 項目・リスク対策 21 項目）を作成してから実装</li>
+            <li>ゲーム RAM の読み取りと画面の照合、衝突判定の診断ツールと同期録画を自作</li>
+            <li>Google Colab での長時間学習に向け、Drive への定期保存と再開時の設定検証を実装</li>
+            <li>前段として DQN と SARSA の比較、PSO によるハイパーパラメータ探索も実施</li>
+          </ul>
+          <div class="foot">
+            <ul class="tags"><li>Python</li><li>PyTorch</li><li>ALE</li><li>Colab</li><li>pytest</li></ul>
+            <a href="https://github.com/HirokiMorita577/MediaDesignTeam1" target="_blank" rel="noopener">GitHub →</a>
+          </div>
+        </article>
 
-  <footer>
-    © 2025 あなたの名前
-  </footer>
+        <article class="project featured">
+          <header>
+            <h3>ハピディアリー</h3>
+            <span class="kind">学内ビジネスプランコンテスト出場 · 2026</span>
+          </header>
+          <p>
+            学内ビジコンに出場したビジネスプランのプロジェクト。
+            完全匿名で「マウントの生まれない」幸せの記録・共有SNSを提案し、プロトタイプまで実装しました。
+            いいね数やフォロワー数を持たず、1投稿が届く人数を固定する設計にしています。
+          </p>
+          <ul class="points">
+            <li>投稿文から AI（Claude API／埋め込み）で幸せのジャンルをリアルタイム推定。API 未設定時はキーワード判定に切り替え</li>
+            <li>「10年前／5年前／いま」のジャンル傾向グラフと、似た傾向の人からの提案機能</li>
+            <li>任意ログインはユーザー名を HMAC ハッシュで保存し、画面には一切出さない。全フォームに CSRF 対策</li>
+            <li>技術仕様書を先に書き、それに沿ってプロトタイプを実装。Docker でデプロイ</li>
+          </ul>
+          <div class="foot">
+            <ul class="tags"><li>Flask</li><li>SQLite</li><li>JavaScript</li><li>Claude API</li><li>Docker</li></ul>
+            <a href="https://github.com/HirokiMorita577/HapiDiary" target="_blank" rel="noopener">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <header>
+            <h3>HackU GNP — LINE 位置情報アプリ</h3>
+            <span class="kind">ハッカソン · 2025</span>
+          </header>
+          <p>
+            LINE の LIFF 上で動く Web アプリ。LINE プロフィールと現在地を取得して地図上に表示し、
+            制限時間つきで参加者同士が遊べる仕組みを作りました。
+          </p>
+          <div class="foot">
+            <ul class="tags"><li>React</li><li>TypeScript</li><li>Vite</li><li>LINE LIFF</li><li>Firebase</li><li>Vercel</li></ul>
+            <a href="https://github.com/HirokiMorita577/HackU_GNP" target="_blank" rel="noopener">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <header>
+            <h3>音声合成 Web アプリ</h3>
+            <span class="kind">ハッカソン · 2025</span>
+          </header>
+          <p>
+            React のフロントエンドと Python の音声合成（Tortoise TTS）サーバーを組み合わせ、
+            入力したテキストを読み上げる Web アプリを制作しました。
+          </p>
+          <div class="foot">
+            <ul class="tags"><li>React</li><li>Python</li><li>Tortoise TTS</li></ul>
+            <a href="https://github.com/HirokiMorita577/Hakkason_React_Project" target="_blank" rel="noopener">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <header>
+            <h3>Three.js 3D モデル紹介サイト</h3>
+            <span class="kind">個人開発 · 2025</span>
+          </header>
+          <p>
+            Three.js と Blender で制作した 3D 空間。GLTF モデルの読み込み、三人称視点のキャラクター操作、
+            cannon-es による物理演算とステージ構築を実装しました。
+          </p>
+          <div class="foot">
+            <ul class="tags"><li>Three.js</li><li>cannon-es</li><li>Blender</li><li>GitHub Pages</li></ul>
+            <span>
+              <a href="https://hirokimorita577.github.io/threejs-demo/" target="_blank" rel="noopener">デモ</a> ·
+              <a href="https://github.com/HirokiMorita577/threejs-demo" target="_blank" rel="noopener">GitHub →</a>
+            </span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="certs">
+      <h2>Certifications</h2>
+      <ul class="timeline">
+        <li>ITパスポート <span class="status">— 取得済み</span></li>
+        <li>基本情報技術者試験 <span class="status">— 学習中</span></li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact">
+        <p>インターン・チーム開発のお誘いなど、お気軽にご連絡ください。</p>
+        <p>
+          Email: <a href="mailto:hiroki.morita.bite@gmail.com">hiroki.morita.bite@gmail.com</a><br />
+          GitHub: <a href="https://github.com/HirokiMorita577" target="_blank" rel="noopener">@HirokiMorita577</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Hiroki Morita</footer>
 </body>
 </html>
