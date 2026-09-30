@@ -35,7 +35,7 @@
 - 成果：学習時の直近100エピソード平均 14,845 点（11,000 エピソード時点。論文記載の人間平均は 15,693 点）
 - 工夫：要件定義書の作成、RAM 読み取りと画面の照合、衝突判定の診断ツール、Colab 長時間学習の保存・再開機能。前段で DQN / SARSA 比較と PSO によるパラメータ探索
 - 技術：Python, PyTorch, ALE, Google Colab, pytest
-- URL：[https://github.com/HirokiMorita577/MediaDesignTeam1](https://github.com/HirokiMorita577/MediaDesignTeam1)
+- URL：[https://github.com/HirokiMorita577/Pacman](https://github.com/HirokiMorita577/Pacman)
 
 ### ハピディアリー｜学内ビジネスプランコンテスト出場・2026
 - 内容：学内ビジコンに出場したビジネスプランのプロジェクト。完全匿名で「マウントの生まれない」幸せの記録・共有SNS を提案し、プロトタイプまで実装
